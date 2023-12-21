@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="/listproduto.css">
+    <title>Lista de Produtos</title>
+</head>
+<body>
+    <div class="col-sm-12">
+        <div class="row">
+            <h2>Lista</h2>
+            <a th:href="@{/produto}">
+                <button type="button" class="btn btn-primary">Novo</button>
+            </a>
+        </div>
+    </div>
+<table class="table table-striped table-border">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nome do Produto</th>
+        <th>Descrição do Produto</th>
+        <th>De</th>
+        <th>Para</th>
+        <th>Quantidade</th>
+        <th>Refrigerado?</th>
+        <th>Consultar</th>
+        <th>Deletar</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="produto : ${produto}">
+        <td th:text="${produto.id}"></td>
+        <td th:text="${produto.nomeProduto}"></td>
+        <td th:text="${produto.descricaoProduto}"></td>
+        <td th:text="${produto.de}"></td>
+        <td th:text="${produto.para}"></td>
+        <td th:text="${produto.quantidade}"></td>
+        <td th:text="${produto.refrigerado} == 1 ? 'SIM' : 'NÃO'"></td>
+        <td>
+            <a th:href="@{/produto/consulta/{id}(id=${produto.id})}">
+                <button class="btnAcao" id="btnEditar"><i class="fa-solid fa-pencil"></i></button>
+            </a>
+        </td>
+        <td>
+            <button th:attr="onclick='excluirProduto(\'/produto/excluir/' + ${produto.id} + '\')'" class="btnAcao" id="btnExcluir"><i class="fa-solid fa-circle-minus" style="color: #FF0000;"></i></button>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+<script>
+    function excluirProduto(url, produtoId) {
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: 'Esta ação não pode ser desfeita!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sim, excluir!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(url, {method: 'DELETE'})
+                    .then(response => {
+                        Swal.fire({
+                            title: 'Excluído!',
+                            text: 'O produto foi removido com sucesso.',
+                            icon: 'success',
+                        }).then(() => {
+                            window.location.reload();
+                        });
+                    })
+                    .catch(error => {
+                        console.error('Erro ao excluir produto:', error);
+                        Swal.fire({
+                            title: 'Erro!',
+                            text: 'Ocorreu um erro ao excluir o produto.',
+                            icon: 'error',
+                        });
+                    });
+            }
+        });
+    }
+
+</script>
+</html>

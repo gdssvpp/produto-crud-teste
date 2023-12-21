@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/produto.css">
+    <title>Gerenciamento de Produto</title>
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-4 mb-4"> Gerenciamento de Produto</h2>
+    <form id="produtoForm" th:action="@{/produto/save}" th:object="${produto}" method="post">
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="id">Id</label>
+                <input type="text" id="id" name="id" th:field="*{id}" class="form-control" readonly>
+            </div>
+            <div class="form-group col">
+                <label for="nomeProduto">Nome do Produto</label>
+                <input type="text" id="nomeProduto" name="nomeProduto" th:field="*{nomeProduto}" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="descricaoProduto">Descrição do Produto</label>
+                <textarea id="descricaoProduto" name="descricaoProduto" th:field="*{descricaoProduto}" class="form-control textArea" required></textarea>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="de">De</label>
+                <input type="text" id="de" name="de" th:field="*{de}" class="form-control" required>
+            </div>
+            <div class="form-group col">
+                <label for="para">Para</label>
+                <input type="text" id="para" name="para" th:field="*{para}" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col">
+                <label for="quantidade">Quantidade</label>
+                <input type="text" id="quantidade" name="quantidade" th:field="*{quantidade}" class="form-control" required>
+            </div>
+            <div class="form-group col">
+                <label for="para">Refrigerado?</label>
+                <select id="refrigerado" name="refrigerado" th:field="*{refrigerado}" class="form-control" required>
+                    <option value="">...</option>
+                    <option value="1">SIM</option>
+                    <option value="2">NÃO</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col mx-auto">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

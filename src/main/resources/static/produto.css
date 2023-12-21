@@ -1,0 +1,17 @@
+body{
+    background-color: #F4F4F4;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+}
+
+.textArea{
+    height: 120px;
+    resize: none;
+}
+
+.btn-margin {
+    margin-top: 10px;
+}

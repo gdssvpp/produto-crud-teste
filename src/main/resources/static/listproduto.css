@@ -1,0 +1,14 @@
+body{
+    padding: 5px;
+}
+
+.btn-primary {
+    margin-left: 10px;
+}
+
+.btnAcao {
+    border: none;
+    background: transparent;
+    padding: 0;
+    margin-left: 20px;
+}
